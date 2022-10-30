@@ -1,14 +1,14 @@
-[![npm version](https://badge.fury.io/js/react-native-iphone-x-helper.svg)](https://badge.fury.io/js/react-native-iphone-x-helper)
+[![npm version](https://badge.fury.io/js/rn-iphone-helper.svg)](https://badge.fury.io/js/rn-iphone-helper)
 
-# react-native-iphone-x-helper
+# rn-iphone-helper
 A library to help you design your react-native app for notched iPhones.
 
 ## Installing ##
-`yarn add react-native-iphone-x-helper`
+`yarn add rn-iphone-helper`
 
 or
 
-`npm i react-native-iphone-x-helper --save`
+`npm i rn-iphone-helper --save`
 
 ## API ##
 
@@ -25,7 +25,7 @@ this method it for creating stylesheets with the iPhone X in mind
 // in style.js
 
 import { StyleSheet } from 'react-native';
-import { ifIphoneX } from 'react-native-iphone-x-helper'
+import { ifIphoneX } from 'rn-iphone-helper'
 
 export default StyleSheet.create({
     header:{
@@ -51,7 +51,7 @@ export default StyleSheet.create({
 
 #### Example ####
 ```js
-import { isIphoneX } from 'react-native-iphone-x-helper'
+import { isIphoneX } from 'rn-iphone-helper'
 
 // ...
 
@@ -86,7 +86,7 @@ if (isIphoneX()) {
 // in style.js
 
 import { StyleSheet } from 'react-native';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { getStatusBarHeight } from 'rn-iphone-helper'
 
 export default StyleSheet.create({
     header:{
@@ -114,7 +114,7 @@ export default StyleSheet.create({
 // in style.js
 
 import { StyleSheet } from 'react-native';
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import { getBottomSpace } from 'rn-iphone-helper'
 
 export default StyleSheet.create({
     totalview: {
@@ -131,7 +131,7 @@ export default StyleSheet.create({
 
 #### Example ####
 ```js
-import { isDynamicIsland } from 'react-native-iphone-x-helper'
+import { isDynamicIsland } from 'rn-iphone-helper'
 
 // ...
 
