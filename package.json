@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ptelad/react-native-iphone-x-helper.git"
+    "url": "git+https://github.com/4TWIGGERS/rn-iphone-x-helper.git"
   },
   "keywords": [
     "react-native",
@@ -18,12 +18,12 @@
     "iphoneX",
     "stylesheet"
   ],
-  "author": "Elad Gil",
+  "author": "Alexander Pataridze",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ptelad/react-native-iphone-x-helper/issues"
+    "url": "https://github.com/4TWIGGERS/rn-iphone-x-helper/issues"
   },
-  "homepage": "https://github.com/ptelad/react-native-iphone-x-helper#readme",
+  "homepage": "https://github.com/4TWIGGERS/rn-iphone-x-helper#readme",
   "peerDependencies": {
     "react-native": ">=0.42.0"
   }
