@@ -4,6 +4,8 @@
 
 A library to help you design your react-native app for iPhones.
 
+**_NOTE:_** Library expects to have `expo-device` or `react-native-device-info`. Otherwise will default to legacy mode
+
 ## Installing
 
 `yarn add rn-iphone-helper`
