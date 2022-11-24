@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/rn-iphone-helper.svg)](https://badge.fury.io/js/rn-iphone-helper)
 
-## Warning breaking changes since in V2:
+## Warning breaking changes in V2:
 
 ~~`isIphoneX`~~ -> `hasNotch`
 
