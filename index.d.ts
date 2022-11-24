@@ -1,6 +1,4 @@
-export function isIphoneX(): boolean;
-export function ifIphoneX<T, U>(iphoneXVal: T, regularVal: U): T | U;
-export function ifIphoneX<T>(iphoneXVal: T): T;
-export function getStatusBarHeight(): number;
+export function hasNotch(): boolean;
+export function getStatusBarHeight(notchHeight: boolean): number;
 export function getBottomSpace(): number;
-export function isDynamicIsland(): boolean;
+export function hasDynamicIsland(): boolean;

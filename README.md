@@ -2,7 +2,7 @@
 
 # rn-iphone-helper
 
-A library to help you design your react-native app for notched iPhones.
+A library to help you design your react-native app for iPhones.
 
 ## Installing
 
@@ -14,80 +14,35 @@ or
 
 ## API
 
-### ifIphoneX(iphoneXStyle, \[regularStyle\])
+### hasNotch()
 
-this method it for creating stylesheets with the iPhone X in mind
-
-#### Parameters
-
-**iphoneXStyle** - the style to apply if you're on iPhone X
-
-**regularStyle (_optional_)** - the style to apply if you're not on iPhone X
+**returns** - `true` if iPhone has a notch.
 
 #### Example
 
 ```js
-// in style.js
-
-import { StyleSheet } from 'react-native';
-import { ifIphoneX } from 'rn-iphone-helper';
-
-export default StyleSheet.create({
-  header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    padding: 10,
-    height: 60,
-    backgroundColor: 'transparent',
-    ...ifIphoneX(
-      {
-        paddingTop: 50,
-      },
-      {
-        paddingTop: 20,
-      }
-    ),
-  },
-});
-```
-
-### isIphoneX()
-
-**returns** - `true` if you running on an iPhone X.
-
-#### Example
-
-```js
-import { isIphoneX } from 'rn-iphone-helper';
+import { hasNotch } from 'rn-iphone-helper';
 
 // ...
 
-if (isIphoneX()) {
+if (hasNotch()) {
   // do this...
 } else {
   // do that...
 }
 ```
 
-### getStatusBarHeight()
+### getStatusBarHeight
 
 #### Parameters
+
+**notchHeightOnly** - (boolean) return notch height only or top inset
 
 **returns**
 
 - Android: `StatusBar.currentHeight`
 - iOS:
-
-| StatusBarHeight       | Devices                                                           |
-| --------------------- | ----------------------------------------------------------------- |
-| 20                    | Others                                                            |
-| 44                    | iPhoneX, Xs, Xs Max, 11 Pro, 11 Pro Max                           |
-| 47                    | iPhone12, 12 Pro, 12 Pro Max, 13, 13 Pro, 13 Pro Max, 14, 14 Plus |
-| 48(Not Supported Now) | iPhone11, Xr                                                      |
-| 50                    | iPhone12 Mini, 13 Mini                                            |
-| 59                    | iPhone14 Pro, 14 Pro Max                                          |
+  See [devices.js](./devices.js)
 
 #### Example
 
@@ -111,8 +66,6 @@ export default StyleSheet.create({
 });
 ```
 
-**_NOTE:_** If your using the the unsafe statusbar height, make sure to add 14dp of padding to your content, otherwise it's going to be flush against the notch
-
 ### getBottomSpace
 
 **returns** - the height of the bottom to fit the safe area: `34` for iPhone X and `0` for other devices.
@@ -134,18 +87,18 @@ export default StyleSheet.create({
 });
 ```
 
-### isDynamicIsland
+### hasDynamicIsland
 
 **returns** the device whether contains the dynamic island. Specifically, 14 Pro and 14 Pro Max
 
 #### Example
 
 ```js
-import { isDynamicIsland } from 'rn-iphone-helper';
+import { hasDynamicIsland } from 'rn-iphone-helper';
 
 // ...
 
-if (isDynamicIsland()) {
+if (hasDynamicIsland()) {
   // do this...
 } else {
   // do that...

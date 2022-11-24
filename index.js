@@ -1,8 +1,10 @@
 import { Dimensions, Platform, StatusBar } from 'react-native';
 
+import devices from './devices';
+
 let deviceId = null;
 
-async function loadDeviceId() {
+function loadDeviceId() {
   try {
     deviceId = require('react-native-device-info').getDeviceId();
     return;
@@ -26,7 +28,7 @@ async function loadDeviceId() {
 
 loadDeviceId();
 
-export function isIphoneX() {
+function hasNotchLegacy() {
   return (
     Platform.OS === 'ios' &&
     !Platform.isPad &&
@@ -41,8 +43,12 @@ export function isIphoneX() {
   );
 }
 
-export function isDynamicIsland() {
-  return Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS;
+export function hasNotch() {
+  if (!deviceId) {
+    return hasNotchLegacy();
+  }
+
+  return !!devices[deviceId]?.hasNotch;
 }
 
 const checkDemension = (size) => {
@@ -54,28 +60,29 @@ const checkDemension = (size) => {
   return windowRes || screenRes;
 };
 
-const _getIphoneStatusBarHeight = () => {
-  if (isIphoneX()) {
+export function hasDynamicIsland() {
+  return !!devices[deviceId]?.hasDynamicIsland;
+}
+
+const _getIphoneStatusBarHeight = (notchHeightOnly) => {
+  if (hasNotch() || hasDynamicIsland()) {
+    const device = devices[deviceId];
+    if (devices[deviceId]) {
+      return notchHeightOnly ? device.notch : device.inset;
+    }
     return 47;
   }
   return 20;
 };
 
-export function ifIphoneX(iphoneXStyle, regularStyle) {
-  if (isIphoneX()) {
-    return iphoneXStyle;
-  }
-  return regularStyle;
-}
-
-export function getStatusBarHeight() {
+export function getStatusBarHeight(notchHeightOnly) {
   return Platform.select({
-    ios: _getIphoneStatusBarHeight(),
+    ios: _getIphoneStatusBarHeight(notchHeightOnly),
     android: StatusBar.currentHeight,
     default: 0,
   });
 }
 
 export function getBottomSpace() {
-  return isIphoneX() ? 34 : 0;
+  return hasNotch() ? 34 : 0;
 }
