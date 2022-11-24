@@ -2,13 +2,19 @@
 
 import { Dimensions, Platform, StatusBar } from 'react-native';
 
-function getDeviceId() {
-  let deviceInfo = require('react-native-device-info');
-  if (deviceInfo) return deviceInfo.getDeviceId();
-  deviceInfo = require('expo-device');
-  if (deviceInfo) return deviceInfo.modelId;
-  return null;
+let deviceId = null;
+
+function loadDeviceId() {
+  try {
+    deviceId = require('react-native-device-info').getDeviceId();
+  } catch (_) {}
+
+  try {
+    deviceId = require('expo-device').modelId;
+  } catch (_) {}
 }
+
+loadDeviceId();
 
 export function isIphoneX() {
   return (
