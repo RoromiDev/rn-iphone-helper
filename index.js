@@ -1,17 +1,18 @@
-/** @format */
-
 import { Dimensions, Platform, StatusBar } from 'react-native';
 
 let deviceId = null;
 
-function loadDeviceId() {
+async function loadDeviceId() {
   try {
     deviceId = require('react-native-device-info').getDeviceId();
+    return;
   } catch (_) {}
 
-  try {
-    deviceId = require('expo-device').modelId;
-  } catch (_) {}
+  const expoModules = global.expo?.modules ?? global.ExpoModules;
+
+  if (expoModules) {
+    deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
+  }
 }
 
 loadDeviceId();
