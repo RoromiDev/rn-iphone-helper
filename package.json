@@ -1,6 +1,6 @@
 {
   "name": "rn-iphone-helper",
-  "version": "1.0.2",
+  "version": "2.0.0-alpha.1",
   "description": "A library to help you design your react-native app for the iPhone X. Based on Elad Gil's react-native-iphone-x-helper.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -25,6 +25,13 @@
   },
   "homepage": "https://github.com/4TWIGGERS/rn-iphone-helper#readme",
   "peerDependencies": {
-    "react-native": ">=0.42.0"
+    "expo-device": "*",
+    "react-native": ">=0.42.0",
+    "react-native-device-info": "*"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-universe": "11.1.1",
+    "prettier": "^2.8.0"
   }
 }
