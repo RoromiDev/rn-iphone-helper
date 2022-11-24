@@ -13,6 +13,15 @@ async function loadDeviceId() {
   if (expoModules) {
     deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
   }
+
+  if (!deviceId) {
+    console.warn(
+      'rn-iphone-helper',
+      `${
+        expoModules ? 'expo-device' : 'react-native-device-info'
+      } not installed defaulting all notched iPhone statusBarHeight to 47`
+    );
+  }
 }
 
 loadDeviceId();
