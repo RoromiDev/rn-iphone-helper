@@ -1,5 +1,14 @@
 [![npm version](https://badge.fury.io/js/rn-iphone-helper.svg)](https://badge.fury.io/js/rn-iphone-helper)
 
+## Warning breaking changes since in V2:
+
+~~`isIphoneX`~~ -> `hasNotch`
+
+~~`isDynamicIsland`~~ -> `hasDynamicIsland`
+
+~~`ifIphoneX`~~ -> was completely removed
+
+
 # rn-iphone-helper
 
 A library to help you design your react-native app for iPhones.
