@@ -139,10 +139,9 @@ export default StyleSheet.create({
 
 ### getCutoutProps
 
-**returns** - display cutout frame and radius. Only works if `hasDynamicIsland() === true`
+**returns** - display cutout frame and radius. Only works if `hasDynamicIsland() === true`.
 
-
-#### Example (TODO)
+**Please open issue if you think adding other device support is worth it**
 
 ```js
 interface CutoutProps {
