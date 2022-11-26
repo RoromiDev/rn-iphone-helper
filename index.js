@@ -2,21 +2,21 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 
 import devices from './devices';
 
-let deviceId = null;
+let modelName = null;
 
 function loadDeviceId() {
   try {
-    deviceId = require('react-native-device-info').getDeviceId();
+    modelName = require('react-native-device-info').getModel();
     return;
   } catch (_) {}
 
   const expoModules = global.expo?.modules ?? global.ExpoModules;
 
   if (expoModules) {
-    deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
+    modelName = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelName;
   }
 
-  if (!deviceId) {
+  if (!modelName) {
     console.warn(
       'rn-iphone-helper',
       `${
@@ -44,14 +44,15 @@ function _hasNotchLegacy() {
 }
 
 export function hasNotch() {
-  if (!deviceId) {
+  const device = devices[modelName];
+  if (!device) {
     return _hasNotchLegacy();
   }
-  return !!devices[deviceId]?.hasNotch;
+  return !!device.hasNotch;
 }
 
 export function hasDynamicIsland() {
-  return !!devices[deviceId]?.hasDynamicIsland;
+  return !!devices[modelName]?.hasDynamicIsland;
 }
 
 export function hasDisplayCutout() {
@@ -67,10 +68,10 @@ const checkDemension = (size) => {
   return windowRes || screenRes;
 };
 
-const _getIphoneStatusBarHeight = (notchHeightOnly) => {
+const _getIphoneTopInset = (notchHeightOnly) => {
   if (hasNotch() || hasDynamicIsland()) {
-    const device = devices[deviceId];
-    if (devices[deviceId]) {
+    const device = devices[modelName];
+    if (devices[modelName]) {
       return notchHeightOnly ? device.notch : device.inset;
     }
     return 47;
@@ -80,7 +81,7 @@ const _getIphoneStatusBarHeight = (notchHeightOnly) => {
 
 export function getTopInset(notchHeightOnly) {
   return Platform.select({
-    ios: _getIphoneStatusBarHeight(notchHeightOnly),
+    ios: _getIphoneTopInset(notchHeightOnly),
     android: StatusBar.currentHeight,
     default: 0,
   });

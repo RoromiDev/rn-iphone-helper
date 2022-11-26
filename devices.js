@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 const _44_30 = {
   inset: 44,
   notch: 30,
@@ -32,28 +34,33 @@ const _59_47 = {
   inset: 59,
   notch: 47,
   hasDynamicIsland: true,
+  cutoutProps: {
+    left: Dimensions.get('window').width / 2 - 60,
+    top: 12,
+    width: 120,
+    height: 35,
+    radius: 14,
+  },
 };
 
 export default {
-  'iPhone10,3': _44_30, // iPhone X
-  'iPhone10,6': _44_30, // iPhone X
-  'iPhone11,2': _44_30, // iPhone Xs
-  'iPhone11,4': _44_30, // iPhone Xs Max
-  'iPhone11,6': _44_30, // iPhone Xs Max
-  'iPhone11,8': _48_33, // iPhone Xr
-  'iPhone12,1': _48_33, // iPhone 11
-  'iPhone12,3': _44_30, // iPhone 11 Pro
-  'iPhone12,5': _44_30, // iPhone 11 Pro Max
-  'iPhone13,1': _50_37, // iPhone 12 mini
-  'iPhone13,2': _47_34, // iPhone 12
-  'iPhone13,3': _47_33, // iPhone 12 Pro
-  'iPhone13,4': _47_33, // iPhone 12 Pro Max
-  'iPhone14,4': _50_37, // iPhone 13 mini
-  'iPhone14,5': _47_34, // iPhone 13
-  'iPhone14,2': _47_33, // iPhone 13 Pro
-  'iPhone14,3': _47_33, // iPhone 13 Pro Max
-  'iPhone14,7': _47_33, // iPhone 14
-  'iPhone14,8': _47_33, // iPhone 14 Plus
-  'iPhone15,2': _59_47, // iPhone 14 Pro
-  'iPhone15,3': _59_47, // iPhone 14 Pro Max
+  'iPhone X': _44_30,
+  'iPhone XS': _44_30,
+  'iPhone XS Max': _44_30,
+  'iPhone XR': _48_33,
+  'iPhone 11': _48_33,
+  'iPhone 11 Pro': _44_30,
+  'iPhone 11 Pro Max': _44_30,
+  'iPhone 12 mini': _50_37,
+  'iPhone 12': _47_34,
+  'iPhone 12 Pro': _47_33,
+  'iPhone 12 Pro Max': _47_33,
+  'iPhone 13 mini': _50_37,
+  'iPhone 13': _47_34,
+  'iPhone 13 Pro': _47_33,
+  'iPhone 13 Pro Max': _47_33,
+  'iPhone 14': _47_33,
+  'iPhone 14 Plus': _47_33,
+  'iPhone 14 Pro': _59_47,
+  'iPhone 14 Pro Max': _59_47,
 };
