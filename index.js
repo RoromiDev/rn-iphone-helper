@@ -1,31 +1,40 @@
 import { Dimensions, Platform, StatusBar } from 'react-native';
 
-import devices from './devices';
+import { deviceIdToProps, insetToDeviceId } from './devices';
+
+const EMPTY_OBJECT = {};
 
 let device = null;
-
 function loadDeviceId() {
-  let deviceId;
+  if (Platform.OS === 'android') return;
+
   try {
-    deviceId = require('react-native-device-info').getDeviceId();
+    device = deviceIdToProps[require('react-native-device-info').getDeviceId()];
   } catch (_) {}
 
   let expoModules;
-  if (!deviceId) {
+  if (!device) {
     expoModules = global.expo?.modules ?? global.ExpoModules;
     if (expoModules) {
-      deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
+      device = deviceIdToProps[expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId];
     }
   }
 
-  if (deviceId) {
-    device = devices[deviceId];
-  } else {
+  if (!device) {
+    try {
+      const {
+        insets: { top, left, right },
+      } = require('react-native-safe-area-context').initialWindowMetrics;
+      device = deviceIdToProps[insetToDeviceId[top || left || right]];
+    } catch (_) {}
+  }
+
+  if (!device) {
     console.warn(
       'rn-iphone-helper',
       `${
         expoModules ? 'expo-device' : 'react-native-device-info'
-      } not installed defaulting all notched iPhone statusBarHeight to 47`
+      } or react-native-safe-area-context not installed or device not found! Defaulting all iPhone with display cutout top inset to 47`
     );
   }
 }
@@ -63,7 +72,7 @@ export function hasDisplayCutout() {
 }
 
 export function getCutoutProps() {
-  return device?.cutoutProps;
+  return device?.cutoutProps || EMPTY_OBJECT;
 }
 
 const checkDemension = (size) => {

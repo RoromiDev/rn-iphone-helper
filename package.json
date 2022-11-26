@@ -1,6 +1,6 @@
 {
   "name": "rn-iphone-helper",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "description": "A library to help you design your react-native app for the iPhone X. Based on Elad Gil's react-native-iphone-x-helper.",
   "main": "index.js",
   "types": "index.d.ts",

@@ -43,7 +43,7 @@ const _59_47 = {
   },
 };
 
-export default {
+export const deviceIdToProps = {
   'iPhone10,3': _44_30, // iPhone X
   'iPhone10,6': _44_30, // iPhone X
   'iPhone11,2': _44_30, // iPhone Xs
@@ -65,4 +65,12 @@ export default {
   'iPhone14,8': _47_33, // iPhone 14 Plus
   'iPhone15,2': _59_47, // iPhone 14 Pro
   'iPhone15,3': _59_47, // iPhone 14 Pro Max
+};
+
+export const insetToDeviceId = {
+  59: 'iPhone15,2',
+  47: 'iPhone13,3',
+  50: 'iPhone13,1',
+  44: 'iPhone10,3',
+  48: 'iPhone11,8',
 };
