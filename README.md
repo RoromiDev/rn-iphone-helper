@@ -142,7 +142,7 @@ export default StyleSheet.create({
 **returns** - display cutout frame and radius. Only works if `hasDynamicIsland() === true`
 
 
-#### Example
+#### Example (TODO)
 
 ```js
 interface CutoutProps {
