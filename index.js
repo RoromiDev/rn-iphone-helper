@@ -5,20 +5,21 @@ import devices from './devices';
 let device = null;
 
 function loadDeviceId() {
-  let modelName;
+  let deviceId;
   try {
-    modelName = require('react-native-device-info').getModel();
-    return;
+    deviceId = require('react-native-device-info').getDeviceId();
   } catch (_) {}
 
-  const expoModules = global.expo?.modules ?? global.ExpoModules;
-
-  if (expoModules) {
-    modelName = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelName;
+  let expoModules;
+  if (!deviceId) {
+    expoModules = global.expo?.modules ?? global.ExpoModules;
+    if (expoModules) {
+      deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
+    }
   }
 
-  if (modelName) {
-    device = devices[modelName];
+  if (deviceId) {
+    device = devices[deviceId];
   } else {
     console.warn(
       'rn-iphone-helper',
