@@ -2,9 +2,10 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 
 import devices from './devices';
 
-let modelName = null;
+let device = null;
 
 function loadDeviceId() {
+  let modelName;
   try {
     modelName = require('react-native-device-info').getModel();
     return;
@@ -16,7 +17,9 @@ function loadDeviceId() {
     modelName = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelName;
   }
 
-  if (!modelName) {
+  if (modelName) {
+    device = devices[modelName];
+  } else {
     console.warn(
       'rn-iphone-helper',
       `${
@@ -44,7 +47,6 @@ function _hasNotchLegacy() {
 }
 
 export function hasNotch() {
-  const device = devices[modelName];
   if (!device) {
     return _hasNotchLegacy();
   }
@@ -52,11 +54,15 @@ export function hasNotch() {
 }
 
 export function hasDynamicIsland() {
-  return !!devices[modelName]?.hasDynamicIsland;
+  return !!device?.hasDynamicIsland;
 }
 
 export function hasDisplayCutout() {
   return hasNotch() || hasDynamicIsland();
+}
+
+export function getCutoutProps() {
+  return device?.cutoutProps;
 }
 
 const checkDemension = (size) => {
@@ -70,9 +76,8 @@ const checkDemension = (size) => {
 
 const _getIphoneTopInset = (notchHeightOnly) => {
   if (hasNotch() || hasDynamicIsland()) {
-    const device = devices[modelName];
-    if (devices[modelName]) {
-      return notchHeightOnly ? device.notch : device.inset;
+    if (device) {
+      return notchHeightOnly ? device.notchHeight : device.inset;
     }
     return 47;
   }
