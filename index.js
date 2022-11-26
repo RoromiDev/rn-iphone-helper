@@ -28,7 +28,7 @@ function loadDeviceId() {
 
 loadDeviceId();
 
-function hasNotchLegacy() {
+function _hasNotchLegacy() {
   return (
     Platform.OS === 'ios' &&
     !Platform.isPad &&
@@ -45,10 +45,17 @@ function hasNotchLegacy() {
 
 export function hasNotch() {
   if (!deviceId) {
-    return hasNotchLegacy();
+    return _hasNotchLegacy();
   }
-
   return !!devices[deviceId]?.hasNotch;
+}
+
+export function hasDynamicIsland() {
+  return !!devices[deviceId]?.hasDynamicIsland;
+}
+
+export function hasDisplayCutout() {
+  return hasNotch() || hasDynamicIsland();
 }
 
 const checkDemension = (size) => {
@@ -59,10 +66,6 @@ const checkDemension = (size) => {
   const screenRes = screen.width === size || screen.height === size;
   return windowRes || screenRes;
 };
-
-export function hasDynamicIsland() {
-  return !!devices[deviceId]?.hasDynamicIsland;
-}
 
 const _getIphoneStatusBarHeight = (notchHeightOnly) => {
   if (hasNotch() || hasDynamicIsland()) {
@@ -75,7 +78,7 @@ const _getIphoneStatusBarHeight = (notchHeightOnly) => {
   return 20;
 };
 
-export function getStatusBarHeight(notchHeightOnly) {
+export function getTopInset(notchHeightOnly) {
   return Platform.select({
     ios: _getIphoneStatusBarHeight(notchHeightOnly),
     android: StatusBar.currentHeight,
@@ -83,6 +86,6 @@ export function getStatusBarHeight(notchHeightOnly) {
   });
 }
 
-export function getBottomSpace() {
-  return hasNotch() ? 34 : 0;
+export function getBottomInset() {
+  return hasDisplayCutout() ? 34 : 0;
 }

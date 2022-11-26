@@ -1,4 +1,5 @@
-export function hasNotch(): boolean;
-export function getStatusBarHeight(notchHeight: boolean): number;
-export function getBottomSpace(): number;
+export function getTopInset(notchHeight: boolean): number;
+export function getBottomInset(): number;
 export function hasDynamicIsland(): boolean;
+export function hasNotch(): boolean;
+export function hashasDisplayCutout(): boolean;

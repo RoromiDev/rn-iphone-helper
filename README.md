@@ -2,12 +2,15 @@
 
 ## Warning breaking changes in V2:
 
+~~`getStatusBarHeight`~~ -> `getTopInset`
+
+~~`getBottomSpace`~~ -> `getBottomInset`
+
 ~~`isIphoneX`~~ -> `hasNotch`
 
 ~~`isDynamicIsland`~~ -> `hasDynamicIsland`
 
 ~~`ifIphoneX`~~ -> was completely removed
-
 
 # rn-iphone-helper
 
@@ -43,7 +46,7 @@ if (hasNotch()) {
 }
 ```
 
-### getStatusBarHeight
+### getTopInset
 
 #### Parameters
 
@@ -61,7 +64,7 @@ if (hasNotch()) {
 // in style.js
 
 import { StyleSheet } from 'react-native';
-import { getStatusBarHeight } from 'rn-iphone-helper';
+import { getTopInset } from 'rn-iphone-helper';
 
 export default StyleSheet.create({
   header: {
@@ -72,14 +75,14 @@ export default StyleSheet.create({
     padding: 10,
     height: 60,
     backgroundColor: 'transparent',
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getTopInset(),
   },
 });
 ```
 
-### getBottomSpace
+### getBottomInset
 
-**returns** - the height of the bottom to fit the safe area: `34` for iPhone X and `0` for other devices.
+**returns** - the bottom inset to fit the safe area: `34` for iPhones with display cutout and `0` for other devices.
 
 #### Example
 
@@ -87,13 +90,13 @@ export default StyleSheet.create({
 // in style.js
 
 import { StyleSheet } from 'react-native';
-import { getBottomSpace } from 'rn-iphone-helper';
+import { getBottomInset } from 'rn-iphone-helper';
 
 export default StyleSheet.create({
   totalview: {
     flex: 1,
     backgroundColor: 'transparent',
-    marginBottom: getBottomSpace(),
+    marginBottom: getBottomInset(),
   },
 });
 ```
