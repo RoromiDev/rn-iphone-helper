@@ -46,10 +46,9 @@ if (hasNotch()) {
 }
 ```
 
-
 ### hasDynamicIsland
 
-**returns** the device whether contains the dynamic island.
+**returns** - `true` if iPhone has the dynamic island.
 
 #### Example
 
@@ -65,19 +64,18 @@ if (hasDynamicIsland()) {
 }
 ```
 
-
 ### hasDisplayCutout
 
-**returns** the device whether contains the dynamic island or a notch
+**returns** - `true` if iPhone has the dynamic island or a notch.
 
 #### Example
 
 ```js
-import { hasDynamicIsland } from 'rn-iphone-helper';
+import { hasDisplayCutout } from 'rn-iphone-helper';
 
 // ...
 
-if (hasDynamicIsland()) {
+if (hasDisplayCutout()) {
   // do this...
 } else {
   // do that...
