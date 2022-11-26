@@ -46,6 +46,44 @@ if (hasNotch()) {
 }
 ```
 
+
+### hasDynamicIsland
+
+**returns** the device whether contains the dynamic island.
+
+#### Example
+
+```js
+import { hasDynamicIsland } from 'rn-iphone-helper';
+
+// ...
+
+if (hasDynamicIsland()) {
+  // do this...
+} else {
+  // do that...
+}
+```
+
+
+### hasDisplayCutout
+
+**returns** the device whether contains the dynamic island or a notch
+
+#### Example
+
+```js
+import { hasDynamicIsland } from 'rn-iphone-helper';
+
+// ...
+
+if (hasDynamicIsland()) {
+  // do this...
+} else {
+  // do that...
+}
+```
+
 ### getTopInset
 
 #### Parameters
@@ -99,24 +137,6 @@ export default StyleSheet.create({
     marginBottom: getBottomInset(),
   },
 });
-```
-
-### hasDynamicIsland
-
-**returns** the device whether contains the dynamic island. Specifically, 14 Pro and 14 Pro Max
-
-#### Example
-
-```js
-import { hasDynamicIsland } from 'rn-iphone-helper';
-
-// ...
-
-if (hasDynamicIsland()) {
-  // do this...
-} else {
-  // do that...
-}
 ```
 
 ## Licence
