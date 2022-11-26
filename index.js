@@ -2,21 +2,29 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 
 import { deviceIdToProps, insetToDeviceId } from './devices';
 
+const isAndroid = Platform.OS === 'android';
+const isIphone = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTV;
+
 const EMPTY_OBJECT = {};
 
+let topInset = 47;
 let device = null;
-function loadDeviceId() {
-  if (Platform.OS === 'android') return;
 
+function loadDeviceId() {
+  if (isAndroid) return;
+
+  let deviceId;
   try {
-    device = deviceIdToProps[require('react-native-device-info').getDeviceId()];
+    deviceId = require('react-native-device-info').getDeviceId();
+    device = deviceIdToProps[deviceId];
   } catch (_) {}
 
   let expoModules;
   if (!device) {
     expoModules = global.expo?.modules ?? global.ExpoModules;
     if (expoModules) {
-      device = deviceIdToProps[expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId];
+      deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
+      device = deviceIdToProps[deviceId];
     }
   }
 
@@ -25,27 +33,27 @@ function loadDeviceId() {
       const {
         insets: { top, left, right },
       } = require('react-native-safe-area-context').initialWindowMetrics;
-      device = deviceIdToProps[insetToDeviceId[top || left || right]];
+      topInset = top || left || right;
+      device = deviceIdToProps[insetToDeviceId[topInset]];
     } catch (_) {}
   }
 
+  let warningText = '';
   if (!device) {
-    console.warn(
-      'rn-iphone-helper',
-      `${
-        expoModules ? 'expo-device' : 'react-native-device-info'
-      } or react-native-safe-area-context not installed or device not found! Defaulting all iPhone with display cutout top inset to 47`
-    );
+    if (!deviceId) {
+      warningText = `${expoModules ? 'expo-device' : 'react-native-device-info'} not installed! `;
+    }
+
+    warningText += `react-native-safe-area-context not installed or we were unable to match inset of ${topInset}!`;
   }
+  if (warningText) console.warn('rn-iphone-helper', warningText);
 }
 
 loadDeviceId();
 
 function _hasNotchLegacy() {
   return (
-    Platform.OS === 'ios' &&
-    !Platform.isPad &&
-    !Platform.isTVOS &&
+    isIphone &&
     (checkDemension(780) ||
       checkDemension(812) ||
       checkDemension(844) ||
@@ -89,7 +97,7 @@ const _getIphoneTopInset = (notchHeightOnly) => {
     if (device) {
       return notchHeightOnly ? device.notchHeight : device.inset;
     }
-    return 47;
+    return topInset;
   }
   return 20;
 };
