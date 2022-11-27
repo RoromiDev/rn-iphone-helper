@@ -1,84 +1,44 @@
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 
-import { deviceIdToProps, insetToDeviceId } from './devices';
+import getDeviceWithRNDeviceInfo from './src/device-info';
+import getPropsWithDimensions from './src/dimensions';
+import getDeviceWithExpoDevice from './src/expo-device';
+import getPropsWithRNSafeAreContext from './src/safe-area-context';
+import { checkDimension } from './src/utils';
 
 const isAndroid = Platform.OS === 'android';
 const isIphone = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTV;
 
 const EMPTY_OBJECT = {};
 
-let topInset = 47;
+let topInset = 44;
 let device = null;
 
-function checkDimensions(portraitWidth, portraitHeight) {
-  const window = Dimensions.get('window');
-  const windowRes =
-    (window.height === portraitHeight && window.width === portraitWidth) ||
-    (window.width === portraitHeight && window.height === portraitWidth);
-
-  const screen = Dimensions.get('screen');
-  const screenRes =
-    (screen.height === portraitHeight && screen.width === portraitWidth) ||
-    (screen.width === portraitHeight && screen.height === portraitWidth);
-
-  return windowRes || screenRes;
-}
-
-function loadDeviceId() {
+function loadDevice() {
   if (isAndroid) return;
 
-  let deviceId;
-  try {
-    deviceId = require('react-native-device-info').getDeviceId();
-    device = deviceIdToProps[deviceId];
-  } catch (_) {}
+  device = getDeviceWithRNDeviceInfo();
 
-  let expoModules;
   if (!device) {
-    expoModules = global.expo?.modules ?? global.ExpoModules;
-    if (expoModules) {
-      deviceId = expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId;
-      device = deviceIdToProps[deviceId];
-    }
+    device = getDeviceWithExpoDevice();
   }
 
   if (!device) {
-    try {
-      const {
-        insets: { top, left, right },
-      } = require('react-native-safe-area-context').initialWindowMetrics;
-      topInset = top || left || right;
-      device = deviceIdToProps[insetToDeviceId[topInset]];
-    } catch (_) {}
+    const deviceProps = getPropsWithRNSafeAreContext();
+    device = deviceProps.device;
+    topInset = deviceProps.topInset;
   }
 
   if (!device) {
     if (hasDisplayCutout()) {
-      if (checkDimensions(390, 844) || checkDimensions(428, 926)) {
-        topInset = 47;
-      } else if (checkDimensions(360, 780)) {
-        topInset = 50;
-      } else if (checkDimensions(393, 852) || checkDimensions(430, 932)) {
-        topInset = 59;
-      } else {
-        topInset = 44;
-      }
-      device = deviceIdToProps[insetToDeviceId[topInset]];
+      const deviceProps = getPropsWithDimensions();
+      device = deviceProps.device;
+      topInset = deviceProps.topInset;
     }
   }
-
-  let warningText = '';
-  if (!device) {
-    if (!deviceId) {
-      warningText = `${expoModules ? 'expo-device' : 'react-native-device-info'} not installed! `;
-    }
-
-    warningText += `react-native-safe-area-context not installed or we were unable to match inset of ${topInset}!`;
-  }
-  if (warningText) console.warn('rn-iphone-helper', warningText);
 }
 
-loadDeviceId();
+loadDevice();
 
 function _hasNotchLegacy() {
   return (
@@ -111,15 +71,6 @@ export function hasDisplayCutout() {
 
 export function getCutoutProps() {
   return device?.cutoutProps || EMPTY_OBJECT;
-}
-
-function checkDimension(size) {
-  // window is not correct sometimes when screen is correct
-  const window = Dimensions.get('window');
-  const windowRes = window.width === size || window.height === size;
-  const screen = Dimensions.get('screen');
-  const screenRes = screen.width === size || screen.height === size;
-  return windowRes || screenRes;
 }
 
 function _getIphoneTopInset(notchHeightOnly) {
