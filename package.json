@@ -27,7 +27,8 @@
   "peerDependencies": {
     "expo-device": "*",
     "react-native": ">=0.42.0",
-    "react-native-device-info": "*"
+    "react-native-device-info": "*",
+    "react-native-safe-area-context": "*"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
