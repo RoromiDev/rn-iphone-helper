@@ -9,6 +9,8 @@ export default function getPropsWithDimensions() {
     topInset = 50;
   } else if (checkDimensions(393, 852) || checkDimensions(430, 932)) {
     topInset = 59;
+  } else {
+    topInset = 44;
   }
   const device = deviceIdToProps[insetToDeviceId[topInset]];
   return { device, topInset };

@@ -11,7 +11,7 @@ const isIphone = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTV;
 
 const EMPTY_OBJECT = {};
 
-let topInset = 44;
+let topInset = 47;
 let device = null;
 
 function loadDevice() {
