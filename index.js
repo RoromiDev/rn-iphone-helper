@@ -4,10 +4,7 @@ import getDeviceWithRNDeviceInfo from './src/device-info';
 import getPropsWithDimensions from './src/dimensions';
 import getDeviceWithExpoDevice from './src/expo-device';
 import getPropsWithRNSafeAreContext from './src/safe-area-context';
-import { checkDimension } from './src/utils';
-
-const isAndroid = Platform.OS === 'android';
-const isIphone = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTV;
+import { hasNotchLegacy, hasDynamicIslandLegacy, isAndroid } from './src/utils';
 
 const EMPTY_OBJECT = {};
 
@@ -40,28 +37,13 @@ function loadDevice() {
 
 loadDevice();
 
-function _hasNotchLegacy() {
-  return (
-    isIphone &&
-    (checkDimension(780) ||
-      checkDimension(812) ||
-      checkDimension(844) ||
-      checkDimension(896) ||
-      checkDimension(926))
-  );
-}
-
 export function hasNotch() {
-  if (!device) return _hasNotchLegacy();
+  if (!device) return hasNotchLegacy();
   return !!device.hasNotch;
 }
 
-function _hasDynamicIslandLegacy() {
-  return isIphone && (checkDimension(852) || checkDimension(932));
-}
-
 export function hasDynamicIsland() {
-  if (!device) return _hasDynamicIslandLegacy();
+  if (!device) return hasDynamicIslandLegacy();
   return !!device?.hasDynamicIsland;
 }
 

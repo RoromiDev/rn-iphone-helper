@@ -1,4 +1,7 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
+
+export const isAndroid = Platform.OS === 'android';
+export const isIphone = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTV;
 
 export function checkDimensions(portraitWidth, portraitHeight) {
   const window = Dimensions.get('window');
@@ -14,11 +17,26 @@ export function checkDimensions(portraitWidth, portraitHeight) {
   return windowRes || screenRes;
 }
 
-export function checkDimension(size) {
+function checkDimension(size) {
   // window is not correct sometimes when screen is correct
   const window = Dimensions.get('window');
   const windowRes = window.width === size || window.height === size;
   const screen = Dimensions.get('screen');
   const screenRes = screen.width === size || screen.height === size;
   return windowRes || screenRes;
+}
+
+export function hasNotchLegacy() {
+  return (
+    isIphone &&
+    (checkDimension(780) ||
+      checkDimension(812) ||
+      checkDimension(844) ||
+      checkDimension(896) ||
+      checkDimension(926))
+  );
+}
+
+export function hasDynamicIslandLegacy() {
+  return isIphone && (checkDimension(852) || checkDimension(932));
 }
