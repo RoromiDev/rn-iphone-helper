@@ -9,9 +9,12 @@ export default function getDeviceWithDimensions() {
     topInset = 50;
   } else if (checkDimensions(393, 852) || checkDimensions(430, 932)) {
     topInset = 59;
-  } else {
+  } else if (checkDimensions(375, 812) || checkDimensions(414, 896)) {
     topInset = 44;
+  } else {
+    topInset = 20;
   }
+
   let device = deviceIdToProps[insetToDeviceId[topInset]];
 
   if (!device) {

@@ -4,14 +4,14 @@ import getDeviceWithRNDeviceInfo from './src/device-info';
 import getDeviceWithDimensions from './src/dimensions';
 import getDeviceWithExpoDevice from './src/expo-device';
 import getDeviceWithRNSafeAreContext from './src/safe-area-context';
-import { isAndroid } from './src/utils';
+import { isIphone } from './src/utils';
 
 const EMPTY_OBJECT = {};
 
 let device = null;
 
 function loadDevice() {
-  if (isAndroid) return;
+  if (!isIphone) return;
 
   device = getDeviceWithRNDeviceInfo();
 
@@ -31,10 +31,12 @@ function loadDevice() {
 loadDevice();
 
 export function hasNotch() {
+  if (!isIphone) return false;
   return !!device.hasNotch;
 }
 
 export function hasDynamicIsland() {
+  if (!isIphone) return false;
   return !!device.hasDynamicIsland;
 }
 
@@ -43,6 +45,7 @@ export function hasDisplayCutout() {
 }
 
 export function getCutoutProps() {
+  if (!isIphone) return EMPTY_OBJECT;
   return device.cutoutProps || EMPTY_OBJECT;
 }
 
