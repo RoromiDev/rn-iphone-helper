@@ -16,7 +16,7 @@
 
 A library to help you design your react-native app for iPhones.
 
-**_NOTE:_** Library expects to have `expo-device`, `react-native-device-info` or `react-native-safe-area-context` installed. Otherwise will default to legacy mode
+**_NOTE:_** Library expects to have `expo-device`, `react-native-device-info` or `react-native-safe-area-context` installed. Otherwise will default to legacy mode. Legacy mode fails to correctly detect Dynamic Island on Simulators.
 
 ## Installing
 
