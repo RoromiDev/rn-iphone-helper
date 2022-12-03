@@ -86,7 +86,7 @@ if (hasDisplayCutout()) {
 
 #### Parameters
 
-**notchHeightOnly** - (boolean) return notch height only or top inset to fit safe area.
+**cutoutEnd** - (boolean) return notch height only or top inset to fit safe area.
 
 **returns**
 

@@ -44,7 +44,7 @@ function hasDynamicIslandLegacy() {
 export function constructDevice(inset) {
   return {
     inset,
-    notchHeight: inset,
+    cutoutEnd: inset,
     hasNotch: hasNotchLegacy(),
     hasDynamicIsland: hasDynamicIslandLegacy(),
   };

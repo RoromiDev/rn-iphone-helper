@@ -49,13 +49,13 @@ export function getCutoutProps() {
   return device.cutoutProps || EMPTY_OBJECT;
 }
 
-function _getIphoneTopInset(notchHeightOnly) {
-  return notchHeightOnly ? device.notchHeight : device.inset;
+function _getIphoneTopInset(cutoutEnd) {
+  return cutoutEnd ? device.cutoutEnd : device.inset;
 }
 
-export function getTopInset(notchHeightOnly) {
+export function getTopInset(cutoutEnd) {
   if (isAndroid) return StatusBar.currentHeight;
-  else if (isIphone) return _getIphoneTopInset(notchHeightOnly);
+  else if (isIphone) return _getIphoneTopInset(cutoutEnd);
   return 0;
 }
 

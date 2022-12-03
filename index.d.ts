@@ -1,4 +1,4 @@
-export function getTopInset(notchHeightOnly: boolean): number;
+export function getTopInset(cutoutEnd: boolean): number;
 export function getBottomInset(): number;
 export function hasDynamicIsland(): boolean;
 export function hasNotch(): boolean;

@@ -2,37 +2,37 @@ import { Dimensions } from 'react-native';
 
 const _44_30 = {
   inset: 44,
-  notchHeight: 30,
+  cutoutEnd: 30,
   hasNotch: true,
 };
 
 const _48_33 = {
   inset: 48,
-  notchHeight: 33,
+  cutoutEnd: 33,
   hasNotch: true,
 };
 
 const _50_37 = {
   inset: 50,
-  notchHeight: 37,
+  cutoutEnd: 37,
   hasNotch: true,
 };
 
 const _47_34 = {
   inset: 47,
-  notchHeight: 34,
+  cutoutEnd: 34,
   hasNotch: true,
 };
 
 const _47_33 = {
   inset: 47,
-  notchHeight: 33,
+  cutoutEnd: 33,
   hasNotch: true,
 };
 
 const _59_47 = {
   inset: 59,
-  notchHeight: 47,
+  cutoutEnd: 47,
   hasDynamicIsland: true,
   cutoutProps: {
     left: Dimensions.get('window').width / 2 - 60,
