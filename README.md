@@ -156,3 +156,8 @@ interface CutoutProps {
 ## Licence
 
 **MIT**
+
+
+## Hire us
+
+Send us an email at hello@4twiggers.com
