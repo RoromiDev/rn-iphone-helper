@@ -1,10 +1,10 @@
-import { Platform, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import getDeviceWithRNDeviceInfo from './src/device-info';
 import getDeviceWithDimensions from './src/dimensions';
 import getDeviceWithExpoDevice from './src/expo-device';
 import getDeviceWithRNSafeAreContext from './src/safe-area-context';
-import { isIphone } from './src/utils';
+import { isAndroid, isIphone } from './src/utils';
 
 const EMPTY_OBJECT = {};
 
@@ -54,11 +54,9 @@ function _getIphoneTopInset(notchHeightOnly) {
 }
 
 export function getTopInset(notchHeightOnly) {
-  return Platform.select({
-    ios: _getIphoneTopInset(notchHeightOnly),
-    android: StatusBar.currentHeight,
-    default: 0,
-  });
+  if (isAndroid) return StatusBar.currentHeight;
+  else if (isIphone) return _getIphoneTopInset(notchHeightOnly);
+  return 0;
 }
 
 export function getBottomInset() {
