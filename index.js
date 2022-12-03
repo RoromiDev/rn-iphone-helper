@@ -54,8 +54,8 @@ function _getIphoneTopInset(cutoutEnd) {
 }
 
 export function getTopInset(cutoutEnd) {
-  if (isAndroid) return StatusBar.currentHeight;
-  else if (isIphone) return _getIphoneTopInset(cutoutEnd);
+  if (isIphone) return _getIphoneTopInset(cutoutEnd);
+  else if (isAndroid) return StatusBar.currentHeight;
   return 0;
 }
 
