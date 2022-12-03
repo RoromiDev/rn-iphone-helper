@@ -1,7 +1,7 @@
 import { deviceIdToProps, insetToDeviceId } from './devices';
-import { checkDimensions } from './utils';
+import { checkDimensions, constructDevice } from './utils';
 
-export default function getPropsWithDimensions() {
+export default function getDeviceWithDimensions() {
   let topInset;
   if (checkDimensions(390, 844) || checkDimensions(428, 926)) {
     topInset = 47;
@@ -12,6 +12,11 @@ export default function getPropsWithDimensions() {
   } else {
     topInset = 44;
   }
-  const device = deviceIdToProps[insetToDeviceId[topInset]];
-  return { device, topInset };
+  let device = deviceIdToProps[insetToDeviceId[topInset]];
+
+  if (!device) {
+    device = constructDevice(topInset);
+  }
+
+  return device;
 }

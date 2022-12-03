@@ -1,6 +1,7 @@
 import { deviceIdToProps, insetToDeviceId } from './devices';
+import { constructDevice } from './utils';
 
-export default function getPropsWithRNSafeAreContext() {
+export default function getDeviceWithRNSafeAreContext() {
   let device;
   let topInset;
   try {
@@ -9,6 +10,9 @@ export default function getPropsWithRNSafeAreContext() {
     } = require('react-native-safe-area-context').initialWindowMetrics;
     topInset = top || left || right;
     device = deviceIdToProps[insetToDeviceId[topInset]];
-  } catch (_) {}
-  return { device, topInset };
+  } catch (_) {
+    device = constructDevice(topInset);
+  }
+
+  return device;
 }

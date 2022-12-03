@@ -1,14 +1,13 @@
 import { Platform, StatusBar } from 'react-native';
 
 import getDeviceWithRNDeviceInfo from './src/device-info';
-import getPropsWithDimensions from './src/dimensions';
+import getDeviceWithDimensions from './src/dimensions';
 import getDeviceWithExpoDevice from './src/expo-device';
-import getPropsWithRNSafeAreContext from './src/safe-area-context';
-import { hasNotchLegacy, hasDynamicIslandLegacy, isAndroid } from './src/utils';
+import getDeviceWithRNSafeAreContext from './src/safe-area-context';
+import { isAndroid } from './src/utils';
 
 const EMPTY_OBJECT = {};
 
-let topInset = 47;
 let device = null;
 
 function loadDevice() {
@@ -21,30 +20,22 @@ function loadDevice() {
   }
 
   if (!device) {
-    const deviceProps = getPropsWithRNSafeAreContext();
-    device = deviceProps.device;
-    topInset = deviceProps.topInset;
+    device = getDeviceWithRNSafeAreContext();
   }
 
   if (!device) {
-    if (hasDisplayCutout()) {
-      const deviceProps = getPropsWithDimensions();
-      device = deviceProps.device;
-      topInset = deviceProps.topInset;
-    }
+    device = getDeviceWithDimensions();
   }
 }
 
 loadDevice();
 
 export function hasNotch() {
-  if (!device) return hasNotchLegacy();
   return !!device.hasNotch;
 }
 
 export function hasDynamicIsland() {
-  if (!device) return hasDynamicIslandLegacy();
-  return !!device?.hasDynamicIsland;
+  return !!device.hasDynamicIsland;
 }
 
 export function hasDisplayCutout() {
@@ -52,17 +43,11 @@ export function hasDisplayCutout() {
 }
 
 export function getCutoutProps() {
-  return device?.cutoutProps || EMPTY_OBJECT;
+  return device.cutoutProps || EMPTY_OBJECT;
 }
 
 function _getIphoneTopInset(notchHeightOnly) {
-  if (hasNotch() || hasDynamicIsland()) {
-    if (device) {
-      return notchHeightOnly ? device.notchHeight : device.inset;
-    }
-    return topInset;
-  }
-  return 20;
+  return notchHeightOnly ? device.notchHeight : device.inset;
 }
 
 export function getTopInset(notchHeightOnly) {

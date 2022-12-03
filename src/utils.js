@@ -26,7 +26,7 @@ function checkDimension(size) {
   return windowRes || screenRes;
 }
 
-export function hasNotchLegacy() {
+function hasNotchLegacy() {
   return (
     isIphone &&
     (checkDimension(780) ||
@@ -37,6 +37,15 @@ export function hasNotchLegacy() {
   );
 }
 
-export function hasDynamicIslandLegacy() {
+function hasDynamicIslandLegacy() {
   return isIphone && (checkDimension(852) || checkDimension(932));
+}
+
+export function constructDevice(inset) {
+  return {
+    inset,
+    notchHeight: inset,
+    hasNotch: hasNotchLegacy(),
+    hasDynamicIsland: hasDynamicIslandLegacy(),
+  };
 }
