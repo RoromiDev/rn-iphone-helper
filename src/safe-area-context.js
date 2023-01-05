@@ -1,7 +1,7 @@
 import { deviceIdToProps, insetToDeviceId } from './devices';
 import { constructDevice } from './utils';
 
-export default function getDeviceWithRNSafeAreContext() {
+export default function getDeviceWithRNSafeAreaContext() {
   let device;
   let topInset;
   try {

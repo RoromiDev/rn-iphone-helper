@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import getDeviceWithRNDeviceInfo from './src/device-info';
 import getDeviceWithDimensions from './src/dimensions';
 import getDeviceWithExpoDevice from './src/expo-device';
-import getDeviceWithRNSafeAreContext from './src/safe-area-context';
+import getDeviceWithRNSafeAreaContext from './src/safe-area-context';
 import { isAndroid, isIphone } from './src/utils';
 
 const EMPTY_OBJECT = {};
@@ -20,7 +20,7 @@ function loadDevice() {
   }
 
   if (!device) {
-    device = getDeviceWithRNSafeAreContext();
+    device = getDeviceWithRNSafeAreaContext();
   }
 
   if (!device) {
