@@ -10,9 +10,10 @@ export default function getDeviceWithRNSafeAreaContext() {
     } = require('react-native-safe-area-context').initialWindowMetrics;
     topInset = top || left || right;
     device = deviceIdToProps[insetToDeviceId[topInset]];
-  } catch (_) {
-    device = constructDevice(topInset);
-  }
+    if (!device) {
+      device = constructDevice(topInset);
+    }
+  } catch (_) {}
 
   return device;
 }
