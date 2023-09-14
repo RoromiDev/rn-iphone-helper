@@ -35,11 +35,11 @@ const _59_47 = {
   cutoutEnd: 47,
   hasDynamicIsland: true,
   cutoutProps: {
-    left: Dimensions.get('window').width / 2 - 60,
+    left: Dimensions.get('window').width / 2 - 62.5,
     top: 12,
-    width: 120,
+    width: 125,
     height: 35,
-    radius: 14,
+    radius: 18,
   },
 };
 
@@ -65,6 +65,10 @@ export const deviceIdToProps = {
   'iPhone14,8': _47_33, // iPhone 14 Plus
   'iPhone15,2': _59_47, // iPhone 14 Pro
   'iPhone15,3': _59_47, // iPhone 14 Pro Max
+  'iPhone15,4': _59_47, // iPhone 15
+  'iPhone15,5': _59_47, // iPhone 15 Plus
+  'iPhone16,1': _59_47, // iPhone 15 Pro
+  'iPhone16,2': _59_47, // iPhone 15 Pro Max
 };
 
 export const insetToDeviceId = {
