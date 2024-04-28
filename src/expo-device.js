@@ -1,9 +1,9 @@
 import { deviceIdToProps } from './devices';
 
 export default function getDeviceWithExpoDevice() {
-  const expoModules = global.expo?.modules ?? global.ExpoModules;
+  const expoModules = global.expo?.modules;
   if (expoModules) {
-    return deviceIdToProps[expoModules.NativeModulesProxy.modulesConstants.ExpoDevice?.modelId];
+    return deviceIdToProps[expoModules.ExpoDevice?.modelId];
   }
   return null;
 }
