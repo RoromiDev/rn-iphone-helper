@@ -62,3 +62,8 @@ export function getTopInset(cutoutEnd) {
 export function getBottomInset() {
   return hasDisplayCutout() ? 34 : 0;
 }
+
+export function isIphoneX() {
+  if (!isIphone) return false;
+  return !!device.hasNotch || !!device.hasDynamicIsland;
+}
