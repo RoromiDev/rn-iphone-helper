@@ -69,6 +69,10 @@ export const deviceIdToProps = {
   'iPhone15,5': _59_47, // iPhone 15 Plus
   'iPhone16,1': _59_47, // iPhone 15 Pro
   'iPhone16,2': _59_47, // iPhone 15 Pro Max
+  'iPhone17,1': _59_47, // iPhone 16 Pro
+  'iPhone17,2': _59_47, // iPhone 16 Pro Max
+  'iPhone17,3': _59_47, // iPhone 16
+  'iPhone17,4': _59_47, // iPhone 16 Plus
 };
 
 export const insetToDeviceId = {
